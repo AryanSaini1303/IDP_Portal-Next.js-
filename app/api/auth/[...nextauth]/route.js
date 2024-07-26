@@ -23,6 +23,6 @@ const handler = NextAuth({
       }
     })
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,// Adding this secret is really crucial for the auth to work properly in production, this can be any random secret which can be stored in the ".env.local" file just like any other secret
 });
 export {handler as GET, handler as POST}
