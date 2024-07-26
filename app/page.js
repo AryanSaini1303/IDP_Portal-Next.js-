@@ -45,7 +45,7 @@ export default function Home() {
             />{" "}
             <h3> Sign In With Github</h3>
           </button>
-          {/*Remove the provider name from the 'signIn' function and you'll get the default screen with default provider button (here, google)*/}
+          {/*Remove the provider name from the 'signIn' function and you'll get the default screen with default provider button*/}
         </section>
       </div>
     </>
