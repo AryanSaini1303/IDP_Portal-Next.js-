@@ -1,95 +1,53 @@
+"use client";
+import style from "./page.module.css";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import styles from "./page.module.css";
+import { Noto_Sans } from "next/font/google";
+const notoSans = Noto_Sans({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Home() {
+  const { data: session } = useSession();
+  console.log(session);
+  if (session) {
+    return (
+      <>
+        <img src={session.user.image} alt="" />
+        <h1>{session.user.name}</h1>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign Out</button>
+      </>
+    );
+  }
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <div className={style.container}>
+        <section className={style.login}>
+          <Image src={"/login.jpg"} width={350} height={430} className={style.loginImage}/>
+          <button
+            onClick={() => signIn("google")}
+            className={`${style.googleLogin} ${notoSans.className}`}
           >
-            By{" "}
+            <Image src={"/googleLogo.png"} width={30} height={30} />
+            <h3> Sign In With Google</h3>
+          </button>
+          <button
+            onClick={() => signIn("github")}
+            className={`${style.githubLogin} ${notoSans.className}`}
+          >
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+              src={"/githubLogo.png"}
+              width={30}
+              height={30}
+              className={style.githubLogo}
+            />{" "}
+            <h3> Sign In With Github</h3>
+          </button>
+          {/*Remove the provider name from the 'signIn' function and you'll get the default screen with default provider button (here, google)*/}
+        </section>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
