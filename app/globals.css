@@ -1,5 +1,281 @@
-body{
-    margin: 0;
-    overflow: hidden;
-    
+body {
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+  font-family: "Nunito", sans-serif;
+  font-family: "Varela Round", sans-serif;
 }
+header {
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+}
+.header {
+  background-color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  position: relative;
+  box-shadow: black 0 0 1rem;
+}
+.header img {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  z-index: 1;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 1fr 6fr 0.5fr;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f4f4f4; */
+  background-image: url("/uniPoster.jpeg");
+  background-position: center;
+  background-size: cover;
+}
+.card {
+  border-radius: 10px;
+  background-color: #ffffffa6;
+  width: 50%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.548);
+  backdrop-filter: blur(5px);
+}
+.main {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333333;
+  margin: 0;
+  font-size: 0.8rem;
+  color: white;
+  box-shadow: black 0 0 1rem;
+}
+.student_info > ul {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: repeat(7, 1fr);
+  list-style-type: none;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1.2rem 1rem;
+  font-weight: bolder;
+}
+.student_info > ul .value {
+  color: rgb(102, 102, 136);
+  font-weight: lighter;
+  margin: 0 0.1rem;
+}
+.main button {
+  font-family: "Nunito", sans-serif;
+  font-family: "Salsa", cursive;
+  border: none;
+  background-color: #04364a;
+  color: whitesmoke;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  transition: all 0.3s;
+  cursor: url("/cursor.png"), auto;
+}
+.main button:hover {
+  box-shadow: 0.5rem 0.5rem 0.5rem black;
+  transform: scale(1.02, 1.02);
+}
+.main button:active {
+  transform: scale(0.95, 0.95);
+  opacity: 0.8;
+}
+.main > h1 {
+  font-size: 1.5rem;
+}
+.options {
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+}
+.header .menu {
+  background-color: white;
+  position: absolute;
+  right: 1.1rem;
+  height: 3rem;
+  width: 10rem;
+  border-radius: 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 0.5s;
+  animation: menuReveal 0.2s forwards ease-in-out;
+}
+@keyframes menuReveal {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.header .menu:hover {
+  background-color: red;
+}
+.header .menu button {
+  border: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  padding: 0.9rem 2rem;
+  border-radius: 32px;
+  cursor: url("/images/cursor.png"), auto;
+  transition: all 0.5s;
+  width: 100%;
+  text-align: left;
+  height: 100%;
+  font-size: 1.05rem;
+}
+.header .menu button:hover {
+  color: white;
+  background-color: red;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1175px) {
+  /* .main button {
+      font-size: 1.2rem;
+    }
+    .main > h1 {
+      font-size: 2.5rem;
+    }*/
+  .student_info > ul {
+    gap: 0 0.5rem;
+    font-size: 1rem;
+  }
+  .main {
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 770px) {
+  header {
+    font-size: 1.5rem;
+  }
+  .student_info > ul {
+    font-size: 0.8rem;
+  }
+  .main {
+    justify-content: center;
+  }
+  /* footer {
+      font-size: 1rem;
+    } */
+  .main h1 {
+    font-size: 1.2rem;
+  }
+  .main button {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 574px) {
+  .card {
+    width: 60%;
+  }
+  body > div > div.header > div.menu > button > img {
+    height: 2.5rem;
+    width: 2.5rem;
+    /* margin-left: 4px; */
+}
+body > div > div.header > div.menu > button {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.2rem;
+  }
+  body > div > div.header > div.menu {
+    width: 20%;
+  }
+}
+@media only screen and (max-width: 490px) {
+  .card {
+    width: 90%;
+  }
+  header {
+    font-size: 1rem;
+  }
+  .header img {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+  footer {
+    font-size: 0.5rem;
+  }
+  body > div > div.header > div.menu > button > img {
+    height: 2rem;
+    width: 2rem;
+  }
+  body > div > div.header > div.menu {
+    height: 50%;
+  }
+}
+@media only screen and (max-width: 389px) {
+  body > div > div.header > div.menu {
+    width: 25%;
+  }
+}
+@media only screen and (max-width: 348px) {
+  body > div > div.header > div.menu > button > img {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .header img {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+  body > div > div.header > div.menu {
+    height: 35%;
+    width: 20%;
+  }
+}
+/* .revealMenu{
+    animation: reveal 0.3s forwards;
+  }
+  @keyframes reveal {
+    0%{
+      opacity: 0;
+      display: none;
+    }
+    100%{
+      opacity: 1;
+      display: flex;
+    }
+  }
+  .hideMenu{
+    animation: hide 0.3s forwards;
+  }
+  @keyframes hide {
+    0%{
+      opacity: 1;
+      display: flex;
+    }
+    100%{
+      opacity: 0;
+      display: none;
+    }
+  } */

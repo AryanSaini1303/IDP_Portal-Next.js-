@@ -74,7 +74,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 1rem 4rem;
+    padding: 0 4rem;
     background-image: url("/uniPoster.jpeg");
     background-position: center;
     background-size: cover;
@@ -82,4 +82,19 @@
 }
 .login .loginImage{
     border-radius: 20px 20px 300px 50px;
+}
+@media only screen and (max-width: 1062px) {
+    .container{
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 617px) {
+    .googleLogin{
+        width: 90%;
+        gap: 0.5rem;
+    }
+    .githubLogin{
+        width: 90%;
+        gap: 0.5rem;
+    }
 }

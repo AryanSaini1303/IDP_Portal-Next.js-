@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl=env("POSTGRES_URL_NON_POOLING")
+}
+
+model Teacher {
+  id           Int      @id @default(autoincrement())
+  name         String
+  designation  String
+  email        String   @unique
+  contact      String   @unique
+  department   String
+  projectTitle String?   @map("project_title")
+  projectType  String?   @map("project_type")
+  sdg          String?
+  score        Float?
+
+  students     Student[]
+}
+
+model Student {
+  id            Int     @id @default(autoincrement())
+  admissionNum  String  @map("admission_num")
+  name          String
+  enrollmentNum String  @map("enrollment_num")
+  school        String
+  program       String
+  contact       String  @unique
+  email         String  @unique
+  teacherId     Int?     @map("teacher_id")
+  externalScore Float?   @map("external_score")
+  internalScore Float?   @map("internal_score")
+
+  teacher       Teacher? @relation(fields: [teacherId], references: [id])
+}
