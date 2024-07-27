@@ -16,7 +16,7 @@ const rubik = Rubik({
 export default function Home() {
   const { data: session } = useSession();
   const [menuClick, setMenuClick] = useState();
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState();
   const [mouseHover, setMouseHover] = useState();
   // console.log(session);
   function menuClickFunc() {
