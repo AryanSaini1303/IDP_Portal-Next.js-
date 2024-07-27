@@ -55,7 +55,7 @@ header {
 }
 .main {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   gap: 1rem;

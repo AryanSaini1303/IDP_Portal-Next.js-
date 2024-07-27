@@ -139,8 +139,8 @@ export default function Home() {
           >
             <Image
               src={"/googleLogo.png"}
-              width={30}
-              height={30}
+              width={screenWidth > 617 ? 30 : 26}
+              height={screenWidth > 617 ? 30 : 26}
               alt="Google Logo"
             />
             <h3> Sign In With Google</h3>
@@ -151,8 +151,8 @@ export default function Home() {
           >
             <Image
               src={"/githubLogo.png"}
-              width={30}
-              height={30}
+              width={screenWidth > 617 ? 30 : 26}
+              height={screenWidth > 617 ? 30 : 26}
               className={style.githubLogo}
               alt="Github Logo"
             />{" "}

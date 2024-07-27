@@ -90,11 +90,17 @@
 }
 @media only screen and (max-width: 617px) {
     .googleLogin{
-        width: 90%;
-        gap: 0.5rem;
+        width: 85%;
+        gap: 0.8rem;
+        font-size: 0.7rem;
     }
     .githubLogin{
-        width: 90%;
-        gap: 0.5rem;
+        width: 85%;
+        gap: 0.8rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+    .login{
+        gap: 0.7rem;
     }
 }
