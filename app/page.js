@@ -23,6 +23,7 @@ export default function Home() {
     setMenuClick(!menuClick);
   }
   useEffect(() => {
+    setScreenWidth(window.innerWidth);
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
