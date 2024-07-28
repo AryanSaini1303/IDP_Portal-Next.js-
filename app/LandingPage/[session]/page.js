@@ -3,6 +3,7 @@ import { Rubik } from "next/font/google";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import LandingPageLoader from "@/components/landingPageLoader";
 
 const rubik = Rubik({
   weight: "400",
@@ -12,8 +13,8 @@ const rubik = Rubik({
 export default function LandingPage({ params }) {
   const [session, setSession] = useState();
   const [studentData, setStudentData] = useState();
+  const [dataNotFound,setDataNotFound]=useState(false);
   const router = useRouter();
-
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
@@ -38,6 +39,17 @@ export default function LandingPage({ params }) {
     fetchData();
   }, [session]);
 
+  useEffect(() => {
+    // console.log(studentData);
+    if (studentData === null && router.pathname !== '/') {
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+      setDataNotFound(true);
+      alert("Sign in with official Email-id only!");
+    }
+  }, [studentData, router]);
+
   if (!session) {
     return <p>Loading...</p>;
   }
@@ -45,7 +57,7 @@ export default function LandingPage({ params }) {
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
       <div className="header">
-        <abbr title="Logout">
+        <abbr title="Logout" style={studentData?{opacity:1}:{opacity:0}}>
           <div className="menu">
             <button
               className={rubik.className}
@@ -73,10 +85,10 @@ export default function LandingPage({ params }) {
           </div>
         </abbr>
         <header>IDP Registration Portal</header>
-        <img src={session.user.image} alt="User's Image" />
+        <img src={session.user.image} alt="User's Image"  style={studentData?{opacity:1}:{opacity:0}}/>
       </div>
       <div className="content">
-        {studentData ? (
+        {studentData&&!dataNotFound ? (
           <div className="card">
             <div className="student_info">
               <ul>
@@ -108,7 +120,9 @@ export default function LandingPage({ params }) {
               </div>
             </div>
           </div>
-        ):<h1>Loading...</h1>}
+        ) : (
+          <h1><LandingPageLoader/></h1>
+        )}
       </div>
       <footer>
         <p>&copy; 2024 IDP Registration Portal. All rights reserved.</p>
