@@ -4,6 +4,9 @@ import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import LandingPageLoader from "@/components/landingPageLoader";
+import Link from "next/link";
+import HeaderComponent from "@/components/headerComponent";
+import FooterComponent from "@/components/footerComponent";
 
 const rubik = Rubik({
   weight: "400",
@@ -56,37 +59,7 @@ export default function LandingPage({ params }) {
 
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
-      <div className="header">
-        <abbr title="Logout" style={studentData?{opacity:1}:{opacity:0}}>
-          <div className="menu">
-            <button
-              className={rubik.className}
-              onClick={() => {
-                signOut({ callbackUrl: "/" }).then(() => {
-                  router.push("/");
-                });
-              }}
-            >
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                height="1em"
-                width="1em"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2" />
-                <path d="M7 12h14l-3-3m0 6l3-3" />
-              </svg>
-            </button>
-          </div>
-        </abbr>
-        <header>IDP Registration Portal</header>
-        <img src={session.user.image} alt="User's Image"  style={studentData?{opacity:1}:{opacity:0}}/>
-      </div>
+      <HeaderComponent studentData={studentData} session={session}/>
       <div className="content">
         {studentData&&!dataNotFound ? (
           <div className="card">
@@ -111,12 +84,12 @@ export default function LandingPage({ params }) {
             <div className="main">
               <h1>Choose Your Category</h1>
               <div className="options">
-                <a href="/Research">
+                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Research`}>
                   <button className={rubik.className}>Research</button>
-                </a>
-                <a href="/Business">
+                </Link>
+                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Business`}>
                   <button className={rubik.className}>Business</button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -124,21 +97,7 @@ export default function LandingPage({ params }) {
           <h1><LandingPageLoader/></h1>
         )}
       </div>
-      <footer>
-        <p>&copy; 2024 IDP Registration Portal. All rights reserved.</p>
-        <div className="icons8">
-          <a
-            target="_blank"
-            href="https://icons8.com/icon/xrwE2Qxg9XYK/hand-cursor"
-          >
-            Cursor
-          </a>
-          icon by{" "}
-          <a target="_blank" href="https://icons8.com">
-            Icons8
-          </a>
-        </div>
-      </footer>
+      <FooterComponent/>
     </div>
   );
 }

@@ -1,0 +1,85 @@
+.header header {
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+}
+.header {
+  background-color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  position: relative;
+  box-shadow: black 0 0 1rem;
+}
+.header img {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  z-index: 1;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.header .menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 0.5s;
+  animation: menuReveal 0.2s forwards ease-in-out;
+}
+@keyframes menuReveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.header .menu button {
+  border: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  transition: all 0.5s;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #333333;
+}
+.header .menu button > * {
+  height: 3rem;
+  width: 3rem;
+  transform: rotate(-180deg);
+}
+.header .menu button:hover {
+  color: white;
+  /* background-color: red; */
+}
+@media only screen and (max-width: 490px) {
+  .header header {
+    font-size: 1rem;
+  }
+  .header img {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+  .header abbr .menu svg {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+@media only screen and (max-width: 348px) {
+  .header img {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+  .header abbr .menu svg {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+}

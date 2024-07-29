@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", sans-serif;
+    font-family: "Varela Round", sans-serif;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar{
+    display: none;
+  }
+  header {
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+  }
+  .header {
+    z-index: 1;
+    position: fixed;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    top: 0;
+    left: 0;
+    width: 98%;
+  }
+  .header img {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    z-index: 1;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .header .menu {
+    background-color: white;
+    position: absolute;
+    right: 1.1rem;
+    height: 3rem;
+    width: 10rem;
+    border-radius: 32px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 0.5s;
+    opacity: 0;
+    display: none;
+  }
+  .header .menu:hover {
+    background-color: red;
+  }
+  .header .menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    padding: 0.9rem 2rem;
+    border-radius: 32px;
+    cursor: url("/cursor.png"), auto;
+    transition: all 0.5s;
+  }
+  .header .menu a:hover {
+    color: white;
+  }
+  @media only screen and (max-width: 1051px) {
+    .header {
+      width: 97%;
+    }
+  }
+  @media only screen and (max-width: 770px) {
+    header {
+      font-size: 1.5rem;
+    }
+    .header {
+      width: 96%;
+    }
+    body > .wrapper > .cards > ul li * {
+      font-size: 0.9rem;
+    }
+  }
+  @media only screen and (max-width: 574px) {
+    body > div > div.header > div.menu > a > img {
+      height: 2.5rem;
+      width: 2.5rem;
+      margin-left: 4px;
+    }
+    body > div > div.header > div.menu > a {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    body > div > div.header > div.menu {
+      width: 20%;
+    }
+  }
+  @media only screen and (max-width: 490px) {
+    header {
+      font-size: 1rem;
+    }
+    .header img {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+    footer * {
+      font-size: 0.5rem;
+    }
+    body > div > div.header > div.menu > a > img {
+      height: 2rem;
+      width: 2rem;
+    }
+    body > div > div.header > div.menu {
+      height: 55%;
+    }
+    .header {
+      width: 94%;
+    }
+    body > div.wrapper > div.cards > ul * {
+      flex-grow: 1;
+    }
+    body > div.wrapper > div.cards > ul {
+      padding: 0 1rem;
+    }
+  }
+  @media only screen and (max-width: 389px) {
+    body > div > div.header > div.menu {
+      width: 25%;
+    }
+  }
+  @media only screen and (max-width: 348px) {
+    body > div > div.header > div.menu > a > img {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+    .header img {
+      height: 1.75rem;
+      width: 1.75rem;
+    }
+    body > div > div.header > div.menu {
+      height: 50%;
+      width: 20%;
+    }
+    .header {
+      width: 91%;
+    }
+  }
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333333;
+    margin: 0;
+    font-size: 0.8rem;
+    color: white;
+  }
+  body > .wrapper > .cards > ul {
+    margin: 8rem 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+  }
+  body > .wrapper > .cards > ul li {
+    cursor: url("/cursor.png"),auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.303);
+    width: 25%;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+  }
+  body > .wrapper > .cards > ul li:hover {
+    transform: scale(1.01,1.01);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.448);
+  }
+  body > .wrapper > .cards > ul li:active {
+    transform: scale(0.95, 0.95);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.947);
+  }
+  body > .wrapper > .cards > ul li * {
+    cursor: url("/cursor.png"),auto;
+    color: black;
+  }
+  body > .wrapper > .cards > ul li a h1 {
+    text-align: center;
+  }
+  body > .wrapper > .cards > ul li a p {
+    color: rgb(125, 121, 121);
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
