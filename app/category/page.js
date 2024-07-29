@@ -4,7 +4,14 @@ import FooterComponent from "@/components/footerComponent";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react';
 import "./globals.css";
+import { Rubik } from "next/font/google";
 
+const rubik = Rubik({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+// We have to enclose useSearchParams inside Suspense tag in production.
 const ResearchPageContent = () => {
   const searchParams = useSearchParams();
   const category = searchParams.get("cat");
@@ -12,14 +19,14 @@ const ResearchPageContent = () => {
 
   return (
     <>
-      <div className="wrapper">
+      <div className={`${"wrapper"} ${rubik.className}`}>
         <HeaderComponent flag={true} sessionImage={sessionImage} />
         <div className="cards">
           <ul>
             {Array.from({ length: 17 }, (_, i) => i + 1).map((sdg) => (
               // Here first we create an array of length 17 from 1 to 17 and use the map function to access the elements i.e.(numbers from 1 to 17) as "sdg"
               <li key={sdg}>
-                <a href={`/${category}?SDG=${sdg}`} style={{ textDecoration: "none" }}>
+                <a href={`/Topics?SDG=${sdg}&category=${category}&image=${sessionImage}`} style={{ textDecoration: "none" }}>
                   <h1>SDG {sdg}</h1>
                   <p>
                     {[

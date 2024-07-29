@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    overflow-x: hidden;
   }
   ::-webkit-scrollbar{
     display: none;
@@ -25,7 +24,7 @@ body {
     padding: 1rem;
     top: 0;
     left: 0;
-    width: 98%;
+    width: 98.5%;
   }
   .header img {
     border-radius: 50%;
@@ -64,14 +63,15 @@ body {
   .header .menu a:hover {
     color: white;
   }
-  body > .wrapper > .cards{
-    background-image: url("/uniPoster.jpeg");
-    background-position: center;
-    background-size: cover;
+  .wrapper{
+    min-height: 100vh;
   }
   @media only screen and (max-width: 1051px) {
     .header {
       width: 97%;
+    }
+    body > .wrapper > .cards > ul li h2{
+      font-size: 0.9rem;
     }
   }
   @media only screen and (max-width: 770px) {
@@ -83,6 +83,23 @@ body {
     }
     body > .wrapper > .cards > ul li * {
       font-size: 0.9rem;
+    }
+    body > .wrapper > .cards > ul li  a  h1{
+      font-size: 1.3rem;
+    }
+    body > .wrapper > .cards > ul li  a  h2{
+      font-size: 0.8rem;
+    }
+  }
+  @media only screen and (max-width: 592px) {
+    body > .wrapper > .cards > ul li  a  h1{
+      font-size: 1rem;
+    }
+    body > .wrapper > .cards > ul li  a  h2{
+      font-size: 0.6rem;
+    }
+    body > .wrapper > .cards > ul li  a  p{
+      font-size: 0.6rem;
     }
   }
   @media only screen and (max-width: 574px) {
@@ -121,9 +138,6 @@ body {
     .header {
       width: 94%;
     }
-    body > div.wrapper > div.cards > ul * {
-      flex-grow: 1;
-    }
     body > div.wrapper > div.cards > ul {
       padding: 0 1rem;
     }
@@ -131,6 +145,9 @@ body {
   @media only screen and (max-width: 389px) {
     body > div > div.header > div.menu {
       width: 25%;
+    }
+    body > .wrapper > .cards > ul li  a  h1{
+      font-size: 0.85rem;
     }
   }
   @media only screen and (max-width: 348px) {
@@ -159,25 +176,42 @@ body {
     font-size: 0.8rem;
     color: white;
   }
+  body > .wrapper > .cards{
+    background-image: url("/uniPoster.jpeg");
+    background-position: center;
+    background-size: cover;
+  }
   body > .wrapper > .cards > ul {
+    min-height: 57.2vh;
     margin: 8rem 0;
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 20px;
-    padding: 0;
+    padding: 0 4rem;
   }
   body > .wrapper > .cards > ul li {
-    cursor: url("/cursor.png"),auto;
-    background-color: rgba(255, 255, 255, 0.527);
+    cursor: url("/cursor.png"), auto;
+    background-color: rgba(255, 255, 255, 0.63);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.712);
-    width: 25%;
     padding: 0.5rem 1rem;
     transition: all 0.3s;
+  }
+  body > .wrapper > .cards > ul li a{
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    gap:2rem;
+  }
+  body > .wrapper > .cards > ul li h1{
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    display: flex;        
+    align-items: center;
+    font-size: 1.7rem;     
   }
   body > .wrapper > .cards > ul li:hover {
     transform: scale(1.01,1.01);
@@ -185,22 +219,16 @@ body {
     background-color: white;
   }
   body > .wrapper > .cards > ul li:active {
-    transform: scale(0.95, 0.95);
+    transform: scale(0.98, 0.98);
     box-shadow: 0 0 25px rgb(0, 0, 0);
     background-color: white;
   }
   body > .wrapper > .cards > ul li * {
-    cursor: url("/cursor.png"),auto;
+    cursor: url("/cursor.png"), auto;
     color: black;
   }
-  body > .wrapper > .cards > ul li a h1 {
-    text-align: center;
-  }
+  
   body > .wrapper > .cards > ul li a p {
     color: rgb(125, 121, 121);
     font-weight: bold;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
