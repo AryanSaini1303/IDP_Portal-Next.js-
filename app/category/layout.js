@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 // Define your viewport settings here
 export const viewport = {
   width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
+  initialScale: 0.76,
+  maximumScale: 0.76,
   userScalable: "no"
 };
 
