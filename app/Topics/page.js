@@ -69,7 +69,7 @@ function Topics() {
             ? topicsData.map((topicData, index) => (
                 <li key={index}>
                   <Link
-                    href={`/confirmation?topic_id=${topicData.id}`}
+                    href={`/confirmation?sessionImage=${sessionImage}&topic_name=${encodeURIComponent(topicData.projectTitle)}&teacher_name=${encodeURIComponent(topicData.name)}`}
                     style={{ textDecoration: "none" }}
                   >
                     <h1 className={rubik.className}>

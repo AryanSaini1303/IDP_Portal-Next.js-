@@ -1,0 +1,14 @@
+.student_info>ul{
+    grid-template-rows: repeat(3, 1fr);
+    gap:10px
+  }
+  .main {
+    justify-content: center;
+  }
+  .student_info>h3{
+    text-align: center;
+  }
+  .student_info>ul li{
+    display: flex;
+    align-items: center;
+  }
