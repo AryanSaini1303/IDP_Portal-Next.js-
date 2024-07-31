@@ -46,7 +46,7 @@ function Confirmation() {
         <div className="card">
           <div className="student_info">
             <h3>
-              Check details thoroughly and click on 'Submit' to Complete
+              Check details thoroughly and click on &apos;Submit&apos; to Complete
               Registration
             </h3>
             <ul>
@@ -54,7 +54,7 @@ function Confirmation() {
               <li className="value">
                 {sdgs ? sdgs.map((sdg, index) => {
                   return index === 0 ? sdg.sdg : `,${sdg.sdg} `;
-                }):"Loading..."}
+                }) : "Loading..."}
               </li>
               <li className="holder">Topic:</li>
               <li className="value">{topicName}</li>
