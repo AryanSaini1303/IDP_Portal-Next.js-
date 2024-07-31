@@ -41,9 +41,8 @@ export default function LandingPage({ params }) {
     };
     fetchData();
   }, [session]);
-
+console.log(studentData);
   useEffect(() => {
-    // console.log(studentData);
     if (studentData === null && router.pathname !== '/') {
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
@@ -51,12 +50,19 @@ export default function LandingPage({ params }) {
       setDataNotFound(true);
       alert("Sign in with official Email-id only!");
     }
+    else if(studentData&&studentData.teacherId){
+      console.log("here");
+      alert("You are already registered!");
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+      setDataNotFound(true);
+    }
   }, [studentData, router]);
-
+  
   if (!session) {
     return <p>Loading...</p>;
   }
-
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent studentData={studentData} session={session}/>
@@ -84,10 +90,10 @@ export default function LandingPage({ params }) {
             <div className="main">
               <h1>Choose Your Category</h1>
               <div className="options">
-                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Research`}>
+                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Research&current_school=${studentData.school}&student_id=${studentData.id}`}>
                   <button className={rubik.className}>Research</button>
                 </Link>
-                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Business`}>
+                <Link href={`/category?image=${encodeURIComponent(session.user.image)}&cat=Business&current_school=${studentData.school}&student_id=${studentData.id}`}>
                   <button className={rubik.className}>Business</button>
                 </Link>
               </div>

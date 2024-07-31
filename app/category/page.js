@@ -16,6 +16,8 @@ const ResearchPageContent = () => {
   const searchParams = useSearchParams();
   const category = searchParams.get("cat");
   const sessionImage = searchParams.get("image");
+  const currentSchool = searchParams.get("current_school");
+  const studentId = searchParams.get("student_id");
 
   return (
     <>
@@ -26,7 +28,7 @@ const ResearchPageContent = () => {
             {Array.from({ length: 17 }, (_, i) => i + 1).map((sdg) => (
               // Here first we create an array of length 17 from 1 to 17 and use the map function to access the elements i.e.(numbers from 1 to 17) as "sdg"
               <li key={sdg}>
-                <a href={`/Topics?SDG=${sdg}&category=${category}&image=${sessionImage}`} style={{ textDecoration: "none" }}>
+                <a href={`/Topics?SDG=${sdg}&category=${category}&image=${sessionImage}&current_school=${currentSchool}&student_id=${studentId}`} style={{ textDecoration: "none" }}>
                   <h1>SDG {sdg}</h1>
                   <p>
                     {[

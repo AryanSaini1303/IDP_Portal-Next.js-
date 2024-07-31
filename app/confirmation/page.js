@@ -6,6 +6,7 @@ import TopicsLoader from "@/components/topicsLoader";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { Rubik } from "next/font/google";
+import Link from "next/link";
 
 const rubik = Rubik({
   weight: "400",
@@ -17,6 +18,8 @@ function Confirmation() {
   const sessionImage = params.get("sessionImage");
   const topicName = decodeURIComponent(params.get("topic_name"));
   const teacherName = decodeURIComponent(params.get("teacher_name"));
+  const teacherId = decodeURIComponent(params.get("teacher_id"));
+  const studentId = decodeURIComponent(params.get("student_id"));
   const [sdgs, setSdgs] = useState();
 
   useEffect(() => {
@@ -64,9 +67,9 @@ function Confirmation() {
           </div>
           <div className="main">
             <div className="options">
-              <a href="/selection">
+              <Link href={`/finalPage?sessionImage=${sessionImage}&teacher_id=${teacherId}&student_id=${studentId}`}>
                 <button className={rubik.className}>Submit</button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -20,6 +20,8 @@ function Topics() {
   const sdg = params.get("SDG");
   const category = params.get("category");
   const sessionImage = params.get("image");
+  const currentSchool = params.get("current_school");
+  const studentId = params.get("student_id");
   const [topicsData, setTopicsData] = useState();
   const router = useRouter();
   const [dataNotFound, setDataNotFound] = useState(false);
@@ -29,13 +31,14 @@ function Topics() {
       if (sdg && category) {
         try {
           const response = await fetch(
-            `/api/getCurrentSdgTopics?sdg=${sdg}&category=${category}`
+            `/api/getCurrentSdgTopics?sdg=${sdg}&category=${category}&current_school=${currentSchool}`
           );
           if (!response.ok) {
             throw new Error(`Error fetching data: ${response.statusText}`);
           }
           const data = await response.json();
           setTopicsData(data);
+          console.log(data);
         } catch (err) {
           console.error("Error fetching topics data:", err);
         }
@@ -69,14 +72,14 @@ function Topics() {
             ? topicsData.map((topicData, index) => (
                 <li key={index}>
                   <Link
-                    href={`/confirmation?sessionImage=${sessionImage}&topic_name=${encodeURIComponent(topicData.projectTitle)}&teacher_name=${encodeURIComponent(topicData.name)}`}
+                    href={`/confirmation?sessionImage=${sessionImage}&topic_name=${encodeURIComponent(topicData.project_title)}&teacher_name=${encodeURIComponent(topicData.teacher)}&student_id=${encodeURIComponent(studentId)}&teacher_id=${topicData.id}`}
                     style={{ textDecoration: "none" }}
                   >
                     <h1 className={rubik.className}>
-                      {topicData.projectTitle}
+                      {topicData.project_title}
                     </h1>
                     <div className="teachers_info">
-                      <h2>{topicData.name}</h2>
+                      <h2>{topicData.teacher}</h2>
                       <p>{topicData.designation}</p>
                     </div>
                   </Link>
