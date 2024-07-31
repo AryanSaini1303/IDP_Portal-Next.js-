@@ -1,18 +1,10 @@
 import prisma from "@/lib/prisma";
-import NodeCache from "node-cache";
-
-const cache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 export default async function GetCurrentSdgTopics(req, res) {
   const SDG_number = req.query.sdg;
   const category = req.query.category;
   const current_school = req.query.current_school;
   console.log(current_school);
-  const cachedData = cache.get(SDG_number + category);
-  if (cachedData) {
-    return res.status(200).json(cachedData);
-  }
   try {
-    /********************************************************************************************************************************************************** */
     let available_topics = [];
     let available_topics_id = [];
     let teachers = [];
@@ -144,15 +136,8 @@ export default async function GetCurrentSdgTopics(req, res) {
         //   designation,
         // }); // we can't use this outside the forEach function as this function is set as async so if we render the file outside this function then the containers will be empty as the data assignment in those containers is taking place in an async function i.e. "forEach"
         res.status(200).json(data);
-        cache.set(SDG_number + category,data);
       }
     });
-    /********************************************************************************************************************************************************** */
-    // const data = await prisma.teacher.findMany({
-    //   where: { sdg: SDG_number, projectType: category },
-    // });
-    // cache.set(SDG_number + category, data);
-    // res.status(200).json(data);
   } catch (e) {
     res.status(404).send({ message: "Data not found" });
   }

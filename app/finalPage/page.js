@@ -72,7 +72,7 @@ function Final() {
             <>
               <Image src={"/done.gif"} width={180} height={180} alt="Success" />
               <h2>Registration Successful</h2>
-              <h4>You will be automaticallyl logged out in {count}s</h4>
+              <h4>You will be automatically logged out in {count}s</h4>
             </>
           ) : (
             "Updating Records..."
