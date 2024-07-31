@@ -21,8 +21,15 @@ function Final() {
   const student_id = params.get("student_id");
   const teacher_id = params.get("teacher_id");
   const [done, setDone] = useState();
-  const [count,setCount]=useState(10);
+  const [count,setCount]=useState(3);
   const router=useRouter();
+
+  useEffect(() => {
+    !localStorage.getItem("userData") &&
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+  }, [localStorage.getItem("userData")]);
 
   useEffect(() => {
     const updateStudent = async () => {
@@ -48,19 +55,20 @@ function Final() {
     };
 
     updateStudent();
-  }, []);
+  }, [student_id,teacher_id]);
   useEffect(()=>{
-    if(!done){setCount(10)};
+    if(!done){setCount(3)};
     const countdown=setTimeout(() => {
       setCount(count-1);
     }, 1000);
     if(count===0){
+      localStorage.removeItem("userData");
       signOut({callbackUrl:"/"}).then(()=>{
         router.push("/");
       })
     }
     return ()=>clearInterval(countdown);
-  },[count])
+  },[count,done])
   // console.log(count);
 
   return (

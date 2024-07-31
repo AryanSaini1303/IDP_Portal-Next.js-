@@ -45,7 +45,11 @@ function Topics() {
       }
     };
     fetchData();
-  }, [sdg, category]);
+    !localStorage.getItem("userData") &&
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+  }, [sdg, category, router]);
 
   useEffect(() => {
     if (topicsData && topicsData.length === 0) {
@@ -72,7 +76,13 @@ function Topics() {
             ? topicsData.map((topicData, index) => (
                 <li key={index}>
                   <Link
-                    href={`/confirmation?sessionImage=${sessionImage}&topic_name=${encodeURIComponent(topicData.project_title)}&teacher_name=${encodeURIComponent(topicData.teacher)}&student_id=${encodeURIComponent(studentId)}&teacher_id=${topicData.id}`}
+                    href={`/confirmation?sessionImage=${sessionImage}&topic_name=${encodeURIComponent(
+                      topicData.project_title
+                    )}&teacher_name=${encodeURIComponent(
+                      topicData.teacher
+                    )}&student_id=${encodeURIComponent(studentId)}&teacher_id=${
+                      topicData.id
+                    }`}
                     style={{ textDecoration: "none" }}
                   >
                     <h1 className={rubik.className}>

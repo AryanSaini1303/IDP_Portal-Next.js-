@@ -16,8 +16,9 @@ const rubik = Rubik({
 export default function LandingPage({ params }) {
   const [session, setSession] = useState();
   const [studentData, setStudentData] = useState();
-  const [dataNotFound,setDataNotFound]=useState(false);
+  const [dataNotFound, setDataNotFound] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
@@ -34,6 +35,7 @@ export default function LandingPage({ params }) {
           }
           const data = await response.json();
           setStudentData(data);
+          localStorage.setItem('userData', JSON.stringify(data));
         } catch (err) {
           console.error("Error fetching student data:", err);
         }
@@ -41,7 +43,9 @@ export default function LandingPage({ params }) {
     };
     fetchData();
   }, [session]);
-console.log(studentData);
+
+  console.log(studentData);
+
   useEffect(() => {
     if (studentData === null && router.pathname !== '/') {
       signOut({ callbackUrl: "/" }).then(() => {
@@ -50,7 +54,7 @@ console.log(studentData);
       setDataNotFound(true);
       alert("Sign in with official Email-id only!");
     }
-    else if(studentData&&studentData.teacherId){
+    else if (studentData && studentData.teacherId) {
       console.log("here");
       alert("You are already registered!");
       signOut({ callbackUrl: "/" }).then(() => {
@@ -59,15 +63,16 @@ console.log(studentData);
       setDataNotFound(true);
     }
   }, [studentData, router]);
-  
+
   if (!session) {
     return <p>Loading...</p>;
   }
+
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent studentData={studentData} session={session}/>
       <div className="content">
-        {studentData&&!dataNotFound ? (
+        {studentData && !dataNotFound ? (
           <div className="card">
             <div className="student_info">
               <ul>

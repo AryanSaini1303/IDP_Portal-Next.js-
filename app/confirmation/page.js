@@ -3,7 +3,7 @@ import "./globals.css";
 import FooterComponent from "@/components/footerComponent";
 import HeaderComponent from "@/components/headerComponent";
 import TopicsLoader from "@/components/topicsLoader";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { Rubik } from "next/font/google";
 import Link from "next/link";
@@ -21,7 +21,15 @@ function Confirmation() {
   const teacherId = decodeURIComponent(params.get("teacher_id"));
   const studentId = decodeURIComponent(params.get("student_id"));
   const [sdgs, setSdgs] = useState();
+  const router=useRouter();
 
+  useEffect(() => {
+    !localStorage.getItem("userData") &&
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+  }, [localStorage.getItem("userData")]);
+  
   useEffect(() => {
     const fetchData = async () => {
       if (topicName) {
