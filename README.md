@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# IDP Portal
 
-First, run the development server:
+Welcome to the IDP Portal! This application is designed to streamline the process of registering for interdisciplinary projects (IDP) at educational institutions. It allows students to easily register for projects, form teams based on various criteria, and manage their participation under the guidance of teachers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Student Registration**: Students can register for projects and view available opportunities.
+- **Team Formation**: The system automatically forms teams based on predefined criteria, ensuring balanced and diverse teams.
+- **Project Management**: Teachers can oversee and manage project registrations and team formations.
+- **Random Team Generation**: Teams are formed randomly based on specific criteria to promote diverse group dynamics.
+- **Patent Protection**: The project has been filed for a patent, highlighting its innovative approach and technical uniqueness.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Frontend**: Developed using Next.js for a seamless and responsive user experience.
+- **Backend**: Utilizes a robust backend built with Next.js to handle API requests and manage data.
+- **Database**: Integrated with a PostgreSQL database to store and manage project and user data efficiently.
+- **Prisma ORM**: Employed for seamless database interactions and schema management.
 
-## Learn More
+## 📦 Installation
 
-To learn more about Next.js, take a look at the following resources:
+To run the IDP Portal locally, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the Repository**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/AryanSaini1303/IDP_Portal-Next.js-.git
+   cd IDP_Portal-Next.js-
+   ```
+2. **Install Dependencies**
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   ```
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory and add your environment variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```env
+   POSTGRES_PRISMA_URL=your_postgres_url
+   POSTGRES_URL_NON_POOLING=your_non_pooling_postgres_url
+   ```
+4. **Run the Development Server**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   npm run dev
+   ```
+
+   Navigate to `http://localhost:3000` in your browser to view the application.
+
+## 📋 Usage
+
+- **For Students**: Register for projects, view available projects, and automatically form teams.
+- **For Teachers**: Manage project registrations, oversee team formations, and view project and student data.
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have suggestions or improvements, please follow these steps:
+
+1. **Fork the Repository**
+2. **Create a Feature Branch**
+3. **Commit Your Changes**
+4. **Push to the Branch**
+5. **Submit a Pull Request**
+
+## 📝 License
+
+This project is licensed.
+
+## 🧩 Future Enhancements
+
+- **Enhanced Team Formation Algorithms**: Implement more sophisticated algorithms for team formation.
+- **User Analytics**: Add analytics to track student and project metrics.
+- **Advanced Search Filters**: Improve project search capabilities with more filters.
