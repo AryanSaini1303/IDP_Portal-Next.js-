@@ -6,7 +6,10 @@ export default async function GetCurrentTopicSdgs(req, res) {
     const data = await prisma.teacher.findMany({
       where: { projectTitle:topicName },
       select:{
-        sdg:true
+        sdg:true,
+        email:true,
+        contact:true,
+        department:true
       }
     });
     console.log(data);

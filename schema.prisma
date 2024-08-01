@@ -32,6 +32,7 @@ model Student {
   program       String
   contact       String  @unique
   email         String  @unique
+  batchYear     String?
   teacherId     Int?     @map("teacher_id")
   externalScore Float?   @map("external_score")
   internalScore Float?   @map("internal_score")

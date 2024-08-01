@@ -9,6 +9,7 @@ export default async function GetCurrentSdgTopics(req, res) {
     let available_topics_id = [];
     let teachers = [];
     let designation = [];
+    let department=[];
     const result = await prisma.teacher.findMany({
       distinct: ["projectTitle"], // Ensure this matches the field you want to be distinct
       select: {
@@ -16,6 +17,7 @@ export default async function GetCurrentSdgTopics(req, res) {
         id: true,
         name: true,
         designation: true,
+        department: true,
       },
       where: {
         projectType: category,
@@ -31,11 +33,11 @@ export default async function GetCurrentSdgTopics(req, res) {
       let schoolFlag = true;
       const result3 = await prisma.student.findMany({
         select: {
-          school: true
+          school: true,
         },
         where: {
-          teacherId: element.id
-        }
+          teacherId: element.id,
+        },
       });
       result3.forEach((element1, index1) => {
         let count = 0;
@@ -56,11 +58,11 @@ export default async function GetCurrentSdgTopics(req, res) {
       }
       const result1 = await prisma.student.findMany({
         select: {
-          id: true
+          id: true,
         },
         where: {
-          teacherId: element.id
-        }
+          teacherId: element.id,
+        },
       });
       if (schoolFlag) {
         if (result1.length < 6) {
@@ -68,18 +70,19 @@ export default async function GetCurrentSdgTopics(req, res) {
           available_topics_id.push(element.id);
           teachers.push(element.name);
           designation.push(element.designation);
+          department.push(element.department);
         } else {
           // console.log(element.projectTitle);
           const distinct_schools = await prisma.student.findMany({
-            distinct: ['school'], // Ensure this is the Prisma field name
+            distinct: ["school"], // Ensure this is the Prisma field name
             select: {
-              school: true
+              school: true,
             },
             where: {
-              teacherId: element.id
-            }
+              teacherId: element.id,
+            },
           });
-          
+
           // the distinct_schools array contains two objects, each with a school property
           if (distinct_schools.length == 3 && result1.length < 8) {
             // console.log(element.projectTitle);
@@ -87,11 +90,13 @@ export default async function GetCurrentSdgTopics(req, res) {
             available_topics_id.push(element.id);
             teachers.push(element.name);
             designation.push(element.designation);
+            department.push(element.department);
           } else if (distinct_schools.length == 2 && result1.length == 6) {
             available_topics.push(element.projectTitle);
             available_topics_id.push(element.id);
             teachers.push(element.name);
             designation.push(element.designation);
+            department.push(element.department);
           } else if (
             distinct_schools.length == 2 &&
             result1.length == 7 &&
@@ -102,6 +107,7 @@ export default async function GetCurrentSdgTopics(req, res) {
             available_topics_id.push(element.id);
             teachers.push(element.name);
             designation.push(element.designation);
+            department.push(element.department);
           } else if (
             distinct_schools.length == 1 &&
             result1.length == 6 &&
@@ -111,6 +117,7 @@ export default async function GetCurrentSdgTopics(req, res) {
             available_topics_id.push(element.id);
             teachers.push(element.name);
             designation.push(element.designation);
+            department.push(element.department);
           }
         }
       }
@@ -119,14 +126,15 @@ export default async function GetCurrentSdgTopics(req, res) {
         // console.log("available_topics_id",available_topics_id);
         // console.log("teachers",teachers);
         // console.log("designation",designation);
-        let data=[]
+        let data = [];
         for (let i = 0; i < available_topics.length; i++) {
-          let dataobj={};
-          dataobj.id=available_topics_id[i],
-          dataobj.project_title=available_topics[i];
-          dataobj.teacher=teachers[i]
-          dataobj.designation=designation[i]
-          data.push(dataobj)
+          let dataobj = {};
+          (dataobj.id = available_topics_id[i]),
+            (dataobj.project_title = available_topics[i]);
+          dataobj.teacher = teachers[i];
+          dataobj.designation = designation[i];
+          dataobj.department=department[i];
+          data.push(dataobj);
         }
         // console.log(data);
         // res.render("topics", {

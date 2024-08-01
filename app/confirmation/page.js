@@ -20,15 +20,15 @@ function Confirmation() {
   const teacherName = decodeURIComponent(params.get("teacher_name"));
   const teacherId = decodeURIComponent(params.get("teacher_id"));
   const studentId = decodeURIComponent(params.get("student_id"));
-  const [sdgs, setSdgs] = useState();
+  const [data, setData] = useState();
   const router=useRouter();
-
+  console.log(data);
   useEffect(() => {
     !localStorage.getItem("userData") &&
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
-  }, [localStorage.getItem("userData")]);
+  }, []);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +41,7 @@ function Confirmation() {
             throw new Error(`Error fetching data: ${response.statusText}`);
           }
           const data = await response.json();
-          setSdgs(data);
+          setData(data);
         } catch (err) {
           console.error("Error fetching topics data:", err);
         }
@@ -63,14 +63,20 @@ function Confirmation() {
             <ul>
               <li className="holder">SDG:</li>
               <li className="value">
-                {sdgs ? sdgs.map((sdg, index) => {
-                  return index === 0 ? sdg.sdg : `,${sdg.sdg} `;
+                {data ? data.map((element, index) => {
+                  return index === 0 ? element.sdg : `,${element.sdg} `;
                 }) : "Loading..."}
               </li>
               <li className="holder">Topic:</li>
-              <li className="value">{topicName}</li>
+              <li className="value">{data?topicName:"Loading..."}</li>
               <li className="holder">Teacher:</li>
-              <li className="value">{teacherName}</li>
+              <li className="value">{data?teacherName:"Loading..."}</li>
+              <li className="holder">Email:</li>
+              <li className="value">{data?data[0].email:"Loading..."}</li>
+              <li className="holder">Contact:</li>
+              <li className="value">{data?data[0].contact:"Loading..."}</li>
+              <li className="holder">School:</li>
+              <li className="value">{data?data[0].department:"Loading..."}</li>
             </ul>
           </div>
           <div className="main">

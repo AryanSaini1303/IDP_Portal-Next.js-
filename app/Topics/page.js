@@ -25,7 +25,7 @@ function Topics() {
   const [topicsData, setTopicsData] = useState();
   const router = useRouter();
   const [dataNotFound, setDataNotFound] = useState(false);
-
+  console.log(topicsData);
   useEffect(() => {
     const fetchData = async () => {
       if (sdg && category) {
@@ -90,7 +90,7 @@ function Topics() {
                     </h1>
                     <div className="teachers_info">
                       <h2>{topicData.teacher}</h2>
-                      <p>{topicData.designation}</p>
+                      <p>{topicData.department}</p>
                     </div>
                   </Link>
                 </li>
