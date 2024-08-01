@@ -36,6 +36,7 @@ export default function RegisteredPage({ dataNotFound, studentData, session }) {
       <div className="content">
         {studentData && !dataNotFound && projectDetails ? (
           <div className="card">
+            <h2 style={{textAlign:"center", margin:"1rem"}}>You have registered successfully 🎉</h2>
             <div className="student_info">
               <ul>
                 <li className="holder">SDG:</li>

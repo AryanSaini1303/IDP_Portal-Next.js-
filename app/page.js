@@ -52,6 +52,9 @@ export default function Home() {
     <>
       <div className={style.container}>
         <section className={style.login}>
+          <div className={style.logo}>
+            <Image src={"/uniLogo.jpg"} width={screenWidth>615?180:150} height={screenWidth>615?70:65}/>
+          </div>
           <Image
             src={"/login.jpg"}
             width={screenWidth > 617 ? 350 : 250}

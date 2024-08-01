@@ -69,6 +69,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    position: relative;
 }
 .container{
     display: flex;
@@ -82,6 +83,11 @@
 }
 .login .loginImage{
     border-radius: 20px 20px 300px 50px;
+}
+.login .logo{
+    position: absolute;
+    top: 1.8rem;
+    left: 4.5rem;
 }
 @media only screen and (max-width: 1062px) {
     .container{
@@ -102,5 +108,9 @@
     }
     .login{
         gap: 0.7rem;
+    }
+    .login .logo{
+        left: 2.7rem;
+        top: 0.8rem;
     }
 }
