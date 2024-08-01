@@ -1,4 +1,3 @@
-
 # IDP Portal
 
 Welcome to the IDP Portal! This application is designed to streamline the process of registering for interdisciplinary projects (IDP) at educational institutions. It allows students to easily register for projects, form teams based on various criteria, and manage their participation under the guidance of teachers.
@@ -65,7 +64,11 @@ Contributions are welcome! If you have suggestions or improvements, please follo
 
 ## 📝 License
 
-This project is licensed.
+This project is licensed. 
+
+https://copyright.gov.in/SearchRoc.aspx
+
+Diary number: 12447/2024-CO/SW
 
 ## 🧩 Future Enhancements
 
