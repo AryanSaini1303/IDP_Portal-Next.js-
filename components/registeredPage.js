@@ -51,7 +51,7 @@ export default function RegisteredPage({ dataNotFound, studentData, session }) {
                 <li className="value">
                   {projectDetails ? projectDetails[1].name : "Loading..."}
                 </li>
-                <li className="holder">email:</li>
+                <li className="holder">Email:</li>
                 <li className="value">{projectDetails[1].email}</li>
                 <li className="holder">Contact:</li>
                 <li className="value">{projectDetails[1].contact}</li>
