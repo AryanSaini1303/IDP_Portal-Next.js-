@@ -30,23 +30,24 @@ export default function RegisteredPage({ dataNotFound, studentData, session }) {
     };
     fetchData();
   }, [session]);
+  console.log(projectDetails);
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent studentData={studentData} session={session} />
       <div className="content">
         {studentData && !dataNotFound && projectDetails ? (
           <div className="card">
-            <h2 style={{textAlign:"center", margin:"1rem"}}>You have registered successfully 🎉</h2>
+            <h2 style={{ textAlign: "center", margin: "1rem" }}>
+              You have registered successfully 🎉
+            </h2>
             <div className="student_info">
               <ul>
                 <li className="holder">SDG:</li>
-                <li className="value">
-                  {projectDetails[0].map((element, index) => {
-                    return index === 0 ? element.sdg : `,${element.sdg}`;
-                  })}
-                </li>
+                <li className="value">{projectDetails[0][0].sdg}</li>
                 <li className="holder">Topic:</li>
                 <li className="value">{projectDetails[1].projectTitle}</li>
+                <li className="holder">Category:</li>
+                <li className="value">{projectDetails[1].projectType}</li>
                 <li className="holder">Faculty:</li>
                 <li className="value">
                   {projectDetails ? projectDetails[1].name : "Loading..."}
@@ -54,11 +55,14 @@ export default function RegisteredPage({ dataNotFound, studentData, session }) {
                 <li className="holder">Email:</li>
                 <li className="value">{projectDetails[1].email}</li>
                 <li className="holder">Contact:</li>
-                <li className="value">{projectDetails[1].contact}</li>
+                <li className="value">
+                  {projectDetails[1].contact.startsWith("'") ||
+                  projectDetails[1].contact.startsWith('"')
+                    ? projectDetails[1].contact.slice(1, -1)
+                    : projectDetails[1].contact}
+                </li>
                 <li className="holder">School:</li>
                 <li className="value">{projectDetails[1].department}</li>
-                <li className="holder">Category:</li>
-                <li className="value">{projectDetails[1].projectType}</li>
               </ul>
             </div>
           </div>

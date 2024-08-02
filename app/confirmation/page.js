@@ -66,13 +66,7 @@ function Confirmation() {
               </h3>
               <ul>
                 <li className="holder">SDG:</li>
-                <li className="value">
-                  {data
-                    ? data.map((element, index) => {
-                        return index === 0 ? element.sdg : `,${element.sdg} `;
-                      })
-                    : "Loading..."}
-                </li>
+                <li className="value">{data ? data[0].sdg : "Loading..."}</li>
                 <li className="holder">Topic:</li>
                 <li className="value">{data ? topicName : "Loading..."}</li>
                 <li className="holder">Teacher:</li>
@@ -81,7 +75,14 @@ function Confirmation() {
                 <li className="value">{data ? data[0].email : "Loading..."}</li>
                 <li className="holder">Contact:</li>
                 <li className="value">
-                  {data ? data[0].contact : "Loading..."}
+                  {data
+                    ? data[0].contact
+                      ? data[0].contact.startsWith("'") ||
+                        data[0].contact.startsWith('"')
+                        ? data[0].contact.slice(1, -1)
+                        : data[0].contact
+                      : "Loading..."
+                    : "Loading..."}
                 </li>
                 <li className="holder">School:</li>
                 <li className="value">
@@ -99,7 +100,9 @@ function Confirmation() {
               </div>
             </div>
           </div>
-        ):<LandingPageLoader/>}
+        ) : (
+          <LandingPageLoader />
+        )}
       </div>
       <FooterComponent />
     </div>

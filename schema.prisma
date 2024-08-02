@@ -25,13 +25,13 @@ model Teacher {
 
 model Student {
   id            Int     @id @default(autoincrement())
-  admissionNum  String  @map("admission_num")
-  name          String
-  enrollmentNum String  @map("enrollment_num")
-  school        String
-  program       String
-  contact       String  @unique
-  email         String  @unique
+  admissionNum  String?  @map("admission_num")
+  name          String?
+  enrollmentNum String?  @map("enrollment_num")
+  school        String?
+  program       String?
+  contact       String?  
+  email         String?  @unique
   batchYear     String?
   teacherId     Int?     @map("teacher_id")
   externalScore Float?   @map("external_score")

@@ -16,7 +16,8 @@
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.4",
-    "vercel": "^35.2.1"
+    "vercel": "^35.2.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "^8",

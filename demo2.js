@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Load the Excel file
-  const workbook = xlsx.readFile('faculty idp.xlsx');
+  const workbook = xlsx.readFile('student_idp.xlsx');
   
   // Select the first sheet
   const sheetName = workbook.SheetNames[0];
@@ -14,20 +14,21 @@ async function main() {
   const data = xlsx.utils.sheet_to_json(sheet);
   
   // Iterate over the data and insert each row into the database
-  console.log(data[0].score);
+//   console.log(data[0]);
   for (const row of data) {
-    await prisma.teacher.create({
+    await prisma.student.create({
       data: {
-        // id: row.id,
-        name: row.name,
-        designation: row.designation,
-        email: row.email,
-        contact: JSON.stringify(row.contact),
-        department: row.department,
-        projectTitle: row.project_title,
-        projectType: row.project_type,
-        sdg: JSON.stringify(row.sdg),
-        score: parseFloat(row.score )|| null,
+        admissionNum: JSON.stringify(row.admission_num) || null,
+        name: row.name || null,
+        enrollmentNum: JSON.stringify(row.enrollment_num) || null,
+        school: row.school || null,
+        program: row.program || null,
+        contact: JSON.stringify(row.contact) || null,
+        email: row.email || null,
+        teacherId: row.teacherId || null,
+        externalScore: row.externalScore || null,
+        internalScore: row.internalScore || null,
+        batchYear:JSON.stringify(row.batchYear) || null
       },
     });
   }
