@@ -11,20 +11,20 @@ export default function LandingPage({ params }) {
   const [dataNotFound, setDataNotFound] = useState(false);
   const [registered, setRegistered] = useState(false);
   const router = useRouter();
-  const {data:session1, status}=useSession();
+  const { data: session1, status } = useSession();
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
 
-  useEffect(()=>{
-    console.log(status);
-    if(status=='unauthenticated'&&(session1||session1===null)){
-      alert("YOU NEED TO LOGIN⚠️")
+  useEffect(() => {
+    // console.log(status);
+    if (status == "unauthenticated" && (session1 || session1 === null)) {
+      alert("YOU NEED TO LOGIN⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
     }
-  },[status,router])
+  }, [status, router, session1]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +46,7 @@ export default function LandingPage({ params }) {
     fetchData();
   }, [session]);
 
-  console.log(studentData);
+  // console.log(studentData);
 
   useEffect(() => {
     if (studentData === null && router.pathname !== "/") {
@@ -64,17 +64,19 @@ export default function LandingPage({ params }) {
     return <p>Loading...</p>;
   }
 
-  return !registered ? (
-    status==='authenticated'&&<NotRegisteredPage
-      dataNotFound={dataNotFound}
-      studentData={studentData}
-      session={session}
-    />
-  ) : (
-    status==='authenticated'&&<RegisteredPage
-      dataNotFound={dataNotFound}
-      studentData={studentData}
-      session={session}
-    />
-  );
+  return !registered
+    ? status === "authenticated" && (
+        <NotRegisteredPage
+          dataNotFound={dataNotFound}
+          studentData={studentData}
+          session={session}
+        />
+      )
+    : status === "authenticated" && (
+        <RegisteredPage
+          dataNotFound={dataNotFound}
+          studentData={studentData}
+          session={session}
+        />
+      );
 }

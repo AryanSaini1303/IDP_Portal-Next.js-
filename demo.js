@@ -14,7 +14,7 @@ async function main() {
   const data = xlsx.utils.sheet_to_json(sheet);
   
   // Iterate over the data and insert each row into the database
-  console.log(data[0].score);
+  // console.log(data[0].score);
   for (const row of data) {
     await prisma.teacher.create({
       data: {

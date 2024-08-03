@@ -25,17 +25,17 @@ function Confirmation() {
   const [data, setData] = useState();
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
-    console.log(status);
-    console.log(session);
+    // console.log(status);
+    // console.log(session);
     if (status === "unauthenticated" && (session || session === null)) {
       alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   useEffect(() => {
     const fetchData = async () => {

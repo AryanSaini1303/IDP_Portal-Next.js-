@@ -27,7 +27,7 @@ function Topics() {
   const router = useRouter();
   const [dataNotFound, setDataNotFound] = useState(false);
   const { data: session, status } = useSession();
-  console.log(topicsData);
+  // console.log(topicsData);
   useEffect(() => {
     const fetchData = async () => {
       if (sdg && category) {
@@ -40,18 +40,18 @@ function Topics() {
           }
           const data = await response.json();
           setTopicsData(data);
-          console.log(data);
+          // console.log(data);
         } catch (err) {
           console.error("Error fetching topics data:", err);
         }
       }
     };
     fetchData();
-  }, [sdg, category, router]);
+  }, [sdg, category, router, currentSchool]);
 
   useEffect(() => {
-    console.log(status);
-    console.log(session);
+    // console.log(status);
+    // console.log(session);
     if (status === "unauthenticated" && (session || session === null)) {
       setDataNotFound(true);
       alert("YOU NEED TO LOGIN FIRST⚠️");
@@ -59,7 +59,7 @@ function Topics() {
         router.push("/");
       });
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   useEffect(() => {
     if (topicsData && topicsData.length === 0) {
@@ -68,7 +68,7 @@ function Topics() {
   }, [topicsData]);
 
   useEffect(() => {
-    if (dataNotFound&&status==='authenticated') {
+    if (dataNotFound) {
       const timeoutId = setTimeout(() => {
         alert(`No topics available for SDG ${sdg}`);
         router.back();
@@ -82,7 +82,7 @@ function Topics() {
       <HeaderComponent sessionImage={sessionImage} flag={true} />
       <div className="cards">
         <ul>
-          {topicsData&&status==='authenticated'
+          {topicsData && status === "authenticated"
             ? topicsData.map((topicData, index) => (
                 <li key={index}>
                   <Link
@@ -105,7 +105,7 @@ function Topics() {
                   </Link>
                 </li>
               ))
-            : !dataNotFound &&status==="authenticated"&& <TopicsLoader />}
+            : !dataNotFound && <TopicsLoader />}
         </ul>
       </div>
       <FooterComponent />

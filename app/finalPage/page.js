@@ -26,15 +26,15 @@ function Final() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    console.log(status);
-    console.log(session);
+    // console.log(status);
+    // console.log(session);
     if (status === "unauthenticated" && (session || session === null)) {
       alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   useEffect(() => {
     const updateStudent = async () => {
@@ -74,7 +74,7 @@ function Final() {
       });
     }
     return () => clearInterval(countdown);
-  }, [count, done]);
+  }, [count, done, router]);
   // console.log(count);
 
   return (
@@ -89,6 +89,7 @@ function Final() {
                   width={180}
                   height={180}
                   alt="Success"
+                  unoptimized
                 />
                 <h2>Registration Successful</h2>
                 <h4>You will be automatically logged out in {count}s</h4>

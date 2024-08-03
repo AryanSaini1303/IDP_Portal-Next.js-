@@ -9,7 +9,7 @@ const rubik = Rubik({
   subsets: ["latin"],
 });
 export default function RegisteredPage({ dataNotFound, studentData, session }) {
-  console.log(studentData);
+  // console.log(studentData);
   const [projectDetails, setProjectDetails] = useState();
   useEffect(() => {
     const fetchData = async () => {
@@ -29,8 +29,8 @@ export default function RegisteredPage({ dataNotFound, studentData, session }) {
       }
     };
     fetchData();
-  }, [session]);
-  console.log(projectDetails);
+  }, [session, studentData.teacherId]);
+  // console.log(projectDetails);
   return (
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent studentData={studentData} session={session} />

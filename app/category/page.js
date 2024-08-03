@@ -24,15 +24,15 @@ const ResearchPageContent = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    console.log(status);
-    console.log(session);
+    // console.log(status);
+    // console.log(session);
     if (status === "unauthenticated" && (session || session === null)) {
       alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
     }
-  }, [status, router]);
+  }, [status, router, session]);
   return (
       <div className={`${"wrapper"} ${rubik.className}`}>
         <HeaderComponent flag={true} sessionImage={sessionImage} />
