@@ -34,7 +34,6 @@ const ResearchPageContent = () => {
     }
   }, [status, router]);
   return (
-    status === "authenticated" && (
       <div className={`${"wrapper"} ${rubik.className}`}>
         <HeaderComponent flag={true} sessionImage={sessionImage} />
         <div className="cards">
@@ -79,7 +78,6 @@ const ResearchPageContent = () => {
         <FooterComponent />
       </div>
     )
-  );
 };
 
 const ResearchPage = () => (

@@ -78,7 +78,6 @@ function Final() {
   // console.log(count);
 
   return (
-    status === "authenticated" && (
       <div className={`wrapper ${rubik.className}`}>
         <HeaderComponent sessionImage={sessionImage} flag={true} />
         <div className="content">
@@ -102,7 +101,6 @@ function Final() {
         <FooterComponent />
       </div>
     )
-  );
 }
 
 export default function FinalPage() {
