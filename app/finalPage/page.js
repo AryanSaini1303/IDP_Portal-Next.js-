@@ -92,7 +92,7 @@ function Final() {
                   unoptimized
                 />
                 <h2>Registration Successful</h2>
-                <h4>You will be automatically logged out in {count}s</h4>
+                <h4>{count===-1?"You were logged out!":`You will be automatically logged out in ${count}s`}</h4>
               </>
             ) : (
               "Updating Records..."
