@@ -32,7 +32,7 @@ export default async function GetCurrentSdgTopics(req, res) {
     }
 
     const processTeacher = async (element) => {
-      let prohibitedSchools = [];
+      let prohibitedSchools = new Map();
       let schoolFlag = true;
 
       const students = await prisma.student.findMany({
@@ -44,22 +44,20 @@ export default async function GetCurrentSdgTopics(req, res) {
         },
       });
 
-      students.forEach((element1, index1) => {
-        let count = 0;
-        for (let i = index1 + 1; i < students.length; i++) {
-          if (element1.school === students[i].school) {
-            count++;
-            if (count === 3) {
-              prohibitedSchools.push(element1.school);
-              break;
-            }
-          }
-        }
+      // Count the number of students from each school
+      students.forEach((student) => {
+        prohibitedSchools.set(
+          student.school,
+          (prohibitedSchools.get(student.school) || 0) + 1
+        );
       });
 
-      if (prohibitedSchools.includes(current_school)) {
-        schoolFlag = false;
-      }
+      // Check if any school has reached the limit
+      prohibitedSchools.forEach((count, school) => {
+        if (count >= 3 && school === current_school) {
+          schoolFlag = false;
+        }
+      });
 
       const studentCount = await prisma.student.count({
         where: {
@@ -116,7 +114,6 @@ export default async function GetCurrentSdgTopics(req, res) {
     }));
 
     res.status(200).json(data);
-
   } catch (e) {
     console.error(e);
     res.status(404).send({ message: "Data not found" });
