@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 import "./globals.css";
 import { Rubik } from "next/font/google";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const rubik = Rubik({
@@ -21,14 +21,18 @@ const ResearchPageContent = () => {
   const currentSchool = searchParams.get("current_school");
   const studentId = searchParams.get("student_id");
   const router = useRouter();
+  const {data:session, status}=useSession();
 
-  useEffect(() => {
-    !localStorage.getItem("userData") &&
+  useEffect(()=>{
+    console.log(status);
+    console.log(session);
+    if(status==='unauthenticated'&&(session||session===null)){
+      alert("YOU NEED TO LOGIN FIRST⚠️")
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
-  }, []);
-
+    }
+  },[status,router])
   return (
     <>
       <div className={`${"wrapper"} ${rubik.className}`}>

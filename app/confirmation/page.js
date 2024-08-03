@@ -8,6 +8,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Rubik } from "next/font/google";
 import Link from "next/link";
 import LandingPageLoader from "@/components/landingPageLoader";
+import { signOut, useSession } from "next-auth/react";
 
 const rubik = Rubik({
   weight: "400",
@@ -23,13 +24,18 @@ function Confirmation() {
   const studentId = decodeURIComponent(params.get("student_id"));
   const [data, setData] = useState();
   const router = useRouter();
+  const { data: session, status } = useSession();
   console.log(data);
   useEffect(() => {
-    !localStorage.getItem("userData") &&
+    console.log(status);
+    console.log(session);
+    if (status === "unauthenticated" && (session || session === null)) {
+      alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
-  }, []);
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +63,7 @@ function Confirmation() {
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent sessionImage={sessionImage} flag={true} />
       <div className="content">
-        {data ? (
+        {data&&status==='authenticated' ? (
           <div className="card">
             <div className="student_info">
               <h3>

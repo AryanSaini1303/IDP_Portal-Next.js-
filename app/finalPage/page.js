@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { Rubik } from "next/font/google";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const rubik = Rubik({
@@ -21,15 +21,20 @@ function Final() {
   const student_id = params.get("student_id");
   const teacher_id = params.get("teacher_id");
   const [done, setDone] = useState();
-  const [count,setCount]=useState(3);
-  const router=useRouter();
+  const [count, setCount] = useState(3);
+  const router = useRouter();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    !localStorage.getItem("userData") &&
+    console.log(status);
+    console.log(session);
+    if (status === "unauthenticated" && (session || session === null)) {
+      alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
-  }, [localStorage.getItem("userData")]);
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const updateStudent = async () => {
@@ -55,40 +60,48 @@ function Final() {
     };
 
     updateStudent();
-  }, [student_id,teacher_id]);
-  useEffect(()=>{
-    if(!done){setCount(3)};
-    const countdown=setTimeout(() => {
-      setCount(count-1);
-    }, 1000);
-    if(count===0){
-      localStorage.removeItem("userData");
-      signOut({callbackUrl:"/"}).then(()=>{
-        router.push("/");
-      })
+  }, [student_id, teacher_id]);
+  useEffect(() => {
+    if (!done) {
+      setCount(3);
     }
-    return ()=>clearInterval(countdown);
-  },[count,done])
+    const countdown = setTimeout(() => {
+      setCount(count - 1);
+    }, 1000);
+    if (count === 0) {
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+    }
+    return () => clearInterval(countdown);
+  }, [count, done]);
   // console.log(count);
 
   return (
-    <div className={`wrapper ${rubik.className}`}>
-      <HeaderComponent sessionImage={sessionImage} flag={true} />
-      <div className="content">
-        <div className="finalCard">
-          {done ? (
-            <>
-              <Image src={"/done.gif"} width={180} height={180} alt="Success" />
-              <h2>Registration Successful</h2>
-              <h4>You will be automatically logged out in {count}s</h4>
-            </>
-          ) : (
-            "Updating Records..."
-          )}
+    status === "authenticated" && (
+      <div className={`wrapper ${rubik.className}`}>
+        <HeaderComponent sessionImage={sessionImage} flag={true} />
+        <div className="content">
+          <div className="finalCard">
+            {done ? (
+              <>
+                <Image
+                  src={"/done.gif"}
+                  width={180}
+                  height={180}
+                  alt="Success"
+                />
+                <h2>Registration Successful</h2>
+                <h4>You will be automatically logged out in {count}s</h4>
+              </>
+            ) : (
+              "Updating Records..."
+            )}
+          </div>
         </div>
+        <FooterComponent />
       </div>
-      <FooterComponent />
-    </div>
+    )
   );
 }
 

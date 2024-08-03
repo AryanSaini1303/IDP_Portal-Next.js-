@@ -1,5 +1,5 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import NotRegisteredPage from "@/components/notRegisteredPage";
@@ -11,10 +11,20 @@ export default function LandingPage({ params }) {
   const [dataNotFound, setDataNotFound] = useState(false);
   const [registered, setRegistered] = useState(false);
   const router = useRouter();
-  console.log(studentData);
+  const {data:session1, status}=useSession();
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
+
+  useEffect(()=>{
+    console.log(status);
+    if(status=='unauthenticated'&&(session1||session1===null)){
+      alert("YOU NEED TO LOGIN⚠️")
+      signOut({ callbackUrl: "/" }).then(() => {
+        router.push("/");
+      });
+    }
+  },[status,router])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +38,6 @@ export default function LandingPage({ params }) {
           }
           const data = await response.json();
           setStudentData(data);
-          localStorage.setItem("userData", JSON.stringify(data));
         } catch (err) {
           console.error("Error fetching student data:", err);
         }

@@ -9,6 +9,7 @@ import { Rubik } from "next/font/google";
 import TopicsLoader from "@/components/topicsLoader";
 import { useRouter } from "next/navigation";
 import "./globals.css";
+import { signOut, useSession } from "next-auth/react";
 
 const rubik = Rubik({
   weight: "400",
@@ -25,6 +26,7 @@ function Topics() {
   const [topicsData, setTopicsData] = useState();
   const router = useRouter();
   const [dataNotFound, setDataNotFound] = useState(false);
+  const { data: session, status } = useSession();
   console.log(topicsData);
   useEffect(() => {
     const fetchData = async () => {
@@ -45,11 +47,19 @@ function Topics() {
       }
     };
     fetchData();
-    !localStorage.getItem("userData") &&
+  }, [sdg, category, router]);
+
+  useEffect(() => {
+    console.log(status);
+    console.log(session);
+    if (status === "unauthenticated" && (session || session === null)) {
+      setDataNotFound(true);
+      alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
-  }, [sdg, category, router]);
+    }
+  }, [status, router]);
 
   useEffect(() => {
     if (topicsData && topicsData.length === 0) {
@@ -58,7 +68,7 @@ function Topics() {
   }, [topicsData]);
 
   useEffect(() => {
-    if (dataNotFound) {
+    if (dataNotFound&&status==='authenticated') {
       const timeoutId = setTimeout(() => {
         alert(`No topics available for SDG ${sdg}`);
         router.back();
@@ -72,7 +82,7 @@ function Topics() {
       <HeaderComponent sessionImage={sessionImage} flag={true} />
       <div className="cards">
         <ul>
-          {topicsData
+          {topicsData&&status==='authenticated'
             ? topicsData.map((topicData, index) => (
                 <li key={index}>
                   <Link
@@ -95,7 +105,7 @@ function Topics() {
                   </Link>
                 </li>
               ))
-            : !dataNotFound && <TopicsLoader />}
+            : !dataNotFound &&status==="authenticated"&& <TopicsLoader />}
         </ul>
       </div>
       <FooterComponent />
