@@ -2,7 +2,7 @@
 import style from "./page.module.css";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import { Noto_Sans, Rubik } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 const notoSans = Noto_Sans({
@@ -13,27 +13,7 @@ const notoSans = Noto_Sans({
 export default function Home() {
   const { data: session } = useSession();
   const [screenWidth, setScreenWidth] = useState();
-  const router=useRouter();
   // console.log(session);
-
-  useEffect(() => {
-    const handlePopState = (event) => {
-      // Prevent the back navigation
-      window.history.pushState(null, "", window.location.href);
-      router.push("/"); // Replace with your specific route
-    };
-
-    // Push the initial state to history
-    window.history.pushState(null, "", window.location.href);
-
-    // Add the event listener
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      // Clean up the event listener on unmount
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [router]);
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {

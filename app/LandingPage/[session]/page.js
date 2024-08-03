@@ -65,13 +65,13 @@ export default function LandingPage({ params }) {
   }
 
   return !registered ? (
-    <NotRegisteredPage
+    status==='authenticated'&&<NotRegisteredPage
       dataNotFound={dataNotFound}
       studentData={studentData}
       session={session}
     />
   ) : (
-    <RegisteredPage
+    status==='authenticated'&&<RegisteredPage
       dataNotFound={dataNotFound}
       studentData={studentData}
       session={session}
