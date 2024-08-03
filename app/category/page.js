@@ -21,20 +21,20 @@ const ResearchPageContent = () => {
   const currentSchool = searchParams.get("current_school");
   const studentId = searchParams.get("student_id");
   const router = useRouter();
-  const {data:session, status}=useSession();
+  const { data: session, status } = useSession();
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(status);
     console.log(session);
-    if(status==='unauthenticated'&&(session||session===null)){
-      alert("YOU NEED TO LOGIN FIRST⚠️")
+    if (status === "unauthenticated" && (session || session === null)) {
+      alert("YOU NEED TO LOGIN FIRST⚠️");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
     }
-  },[status,router])
+  }, [status, router]);
   return (
-    <>
+    status === "authenticated" && (
       <div className={`${"wrapper"} ${rubik.className}`}>
         <HeaderComponent flag={true} sessionImage={sessionImage} />
         <div className="cards">
@@ -78,7 +78,7 @@ const ResearchPageContent = () => {
         </div>
         <FooterComponent />
       </div>
-    </>
+    )
   );
 };
 
