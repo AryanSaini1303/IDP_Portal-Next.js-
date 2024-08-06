@@ -65,16 +65,14 @@ function Final() {
   console.log(schools);
   useEffect(() => {
     let i = 0;
-    if (schools) {
-      if(schools.length >= 8){
-        setConfirmed(false);
-      }
-      else if(schools.length===0){
-        setConfirmed(true);
-      }
+    if (schools&&schools.length >= 8) {
+      setConfirmed(false);
+    } else if (schools&&schools.length === 0) {
+      setConfirmed(true);
     } else {
       schools &&
         schools.map((school, index) => {
+          console.log("here");
           if (school.school === currentSchool) {
             i++;
             console.log(i);
@@ -82,14 +80,16 @@ function Final() {
           if (index === schools.length - 1) {
             console.log(i);
             if (i >= 3) {
+              console.log("here");
               setConfirmed(false);
             } else {
+              console.log("here");
               setConfirmed(true);
             }
           }
         });
     }
-  }, [schools]);
+  }, [schools, currentSchool]);
   console.log(confirmed);
 
   useEffect(() => {
