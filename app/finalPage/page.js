@@ -64,29 +64,27 @@ function Final() {
 
   console.log(schools);
   useEffect(() => {
+    let i=0;
     if (schools && schools.length >= 8) {
       setConfirmed(false);
     } else {
       schools &&
         schools.map((school) => {
           if (school.school === currentSchool) {
-            setIterator(iterator+1)
-            console.log(iterator); 
+            i++;
+            console.log(i);
           }
         });
+        console.log(i);
+        if(i>=3){
+          setConfirmed(false);
+        }
+        else{
+          setConfirmed(true);
+        }
     }
   }, [schools]);
   console.log(confirmed);
-
-  useEffect(()=>{
-    console.log(iterator);
-    if(iterator===3){
-      setConfirmed(false);
-    }
-    else{
-      setConfirmed(true);
-    }
-  },[iterator])
 
   useEffect(() => {
     if (confirmed === false) {
