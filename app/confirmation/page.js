@@ -75,7 +75,7 @@ function Confirmation() {
                 <li className="value">{data ? data[0].sdg : "Loading..."}</li>
                 <li className="holder">Topic:</li>
                 <li className="value">{data ? topicName : "Loading..."}</li>
-                <li className="holder">Teacher:</li>
+                <li className="holder">Faculty:</li>
                 <li className="value">{data ? teacherName : "Loading..."}</li>
                 <li className="holder">Email:</li>
                 <li className="value">{data ? data[0].email : "Loading..."}</li>
