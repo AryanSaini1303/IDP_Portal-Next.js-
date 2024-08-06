@@ -22,10 +22,13 @@ function Confirmation() {
   const teacherName = decodeURIComponent(params.get("teacher_name"));
   const teacherId = decodeURIComponent(params.get("teacher_id"));
   const studentId = decodeURIComponent(params.get("student_id"));
+  const sdg = params.get("sdg");
+  const category = params.get("category");
+  const currentSchool = params.get("currentSchool");
   const [data, setData] = useState();
   const router = useRouter();
   const { data: session, status } = useSession();
-  // console.log(data);
+  console.log(sdg,category,currentSchool);
   useEffect(() => {
     // console.log(status);
     // console.log(session);
@@ -63,7 +66,7 @@ function Confirmation() {
     <div className={`${"wrapper"} ${rubik.className}`}>
       <HeaderComponent sessionImage={sessionImage} flag={true} />
       <div className="content">
-        {data&&status==='authenticated' ? (
+        {data && status === "authenticated" ? (
           <div className="card">
             <div className="student_info">
               <h3>
@@ -99,7 +102,7 @@ function Confirmation() {
             <div className="main">
               <div className="options">
                 <Link
-                  href={`/finalPage?sessionImage=${sessionImage}&teacher_id=${teacherId}&student_id=${studentId}`}
+                  href={`/finalPage?sessionImage=${sessionImage}&teacher_id=${teacherId}&student_id=${studentId}&sdg=${sdg}&category=${category}&currentSchool=${currentSchool}`}
                 >
                   <button className={rubik.className}>Submit</button>
                 </Link>

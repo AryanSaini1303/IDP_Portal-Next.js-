@@ -27,7 +27,7 @@ function Topics() {
   const router = useRouter();
   const [dataNotFound, setDataNotFound] = useState(false);
   const { data: session, status } = useSession();
-  // console.log(topicsData);
+  console.log(topicsData&&topicsData);
   useEffect(() => {
     const fetchData = async () => {
       if (sdg && category) {
@@ -92,7 +92,7 @@ function Topics() {
                       topicData.teacher
                     )}&student_id=${encodeURIComponent(studentId)}&teacher_id=${
                       topicData.id
-                    }`}
+                    }&sdg=${encodeURIComponent(sdg)}&category=${encodeURIComponent(category)}&currentSchool=${currentSchool}`}
                     style={{ textDecoration: "none" }}
                   >
                     <h1 className={rubik.className}>

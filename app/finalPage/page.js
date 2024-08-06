@@ -20,10 +20,15 @@ function Final() {
   const sessionImage = params.get("sessionImage");
   const student_id = params.get("student_id");
   const teacher_id = params.get("teacher_id");
+  const currentSchool = params.get("currentSchool");
   const [done, setDone] = useState();
   const [count, setCount] = useState(3);
   const router = useRouter();
+  const [confirmed, setConfirmed] = useState();
+  const [schools, setSchools] = useState();
   const { data: session, status } = useSession();
+  console.log(teacher_id);
+  console.log(currentSchool);
 
   useEffect(() => {
     // console.log(status);
@@ -37,6 +42,52 @@ function Final() {
   }, [status, router, session]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      if (teacher_id) {
+        try {
+          const response = await fetch(
+            `/api/topicConfirmation?teacherId=${encodeURIComponent(teacher_id)}`
+          );
+          if (!response.ok) {
+            throw new Error(`Error fetching data: ${response.statusText}`);
+          }
+          const data = await response.json();
+          setSchools(data);
+        } catch (err) {
+          console.error("Error fetching schools data:", err);
+        }
+      }
+    };
+    fetchData();
+  }, [teacher_id]);
+
+  console.log(schools);
+  useEffect(() => {
+    if (schools && schools.length >= 8) {
+      setConfirmed(false);
+    } else {
+      schools &&
+        schools.map((school) => {
+          if (school.school === currentSchool) {
+            setConfirmed(false);
+          } else {
+            setConfirmed(true);
+          }
+        });
+    }
+  }, [schools]);
+  console.log(confirmed);
+  useEffect(() => {
+    if (confirmed === false) {
+      alert("No Eligible Seats Available For This Project, Kindly Select Other Project.");
+      // signOut({ callbackUrl: "/" }).then(() => {
+      //   router.push("/");
+      // });
+      window.history.go(-2);
+    }
+  }, [confirmed]);
+
+  useEffect(() => {
     const updateStudent = async () => {
       try {
         const response = await fetch("/api/updateStudent", {
@@ -46,11 +97,9 @@ function Final() {
           },
           body: JSON.stringify({ teacher_id, student_id }),
         });
-
         if (!response.ok) {
           throw new Error("Failed to update student");
         }
-
         const result = await response.json();
         console.log(result.message);
         setDone(true); // Optional: handle success
@@ -58,9 +107,9 @@ function Final() {
         console.error(error); // Optional: handle error
       }
     };
+    confirmed && updateStudent();
+  }, [student_id, teacher_id, confirmed]);
 
-    updateStudent();
-  }, [student_id, teacher_id]);
   useEffect(() => {
     if (!done) {
       setCount(3);
@@ -78,30 +127,34 @@ function Final() {
   // console.log(count);
 
   return (
-      <div className={`wrapper ${rubik.className}`}>
-        <HeaderComponent sessionImage={sessionImage} flag={true} />
-        <div className="content">
-          <div className="finalCard">
-            {done ? (
-              <>
-                <Image
-                  src={"/done.gif"}
-                  width={180}
-                  height={180}
-                  alt="Success"
-                  unoptimized
-                />
-                <h2>Registration Successful</h2>
-                <h4>{count===-1?"You were logged out!":`You will be automatically logged out in ${count}s`}</h4>
-              </>
-            ) : (
-              "Updating Records..."
-            )}
-          </div>
+    <div className={`wrapper ${rubik.className}`}>
+      <HeaderComponent sessionImage={sessionImage} flag={true} />
+      <div className="content">
+        <div className="finalCard">
+          {done ? (
+            <>
+              <Image
+                src={"/done.gif"}
+                width={180}
+                height={180}
+                alt="Success"
+                unoptimized
+              />
+              <h2>Registration Successful</h2>
+              <h4>
+                {count === -1
+                  ? "You were logged out!"
+                  : `You will be automatically logged out in ${count}s`}
+              </h4>
+            </>
+          ) : (
+            "Updating Records..."
+          )}
         </div>
-        <FooterComponent />
       </div>
-    )
+      <FooterComponent />
+    </div>
+  );
 }
 
 export default function FinalPage() {
