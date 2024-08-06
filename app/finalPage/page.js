@@ -66,30 +66,28 @@ function Final() {
   useEffect(() => {
     if (schools && schools.length >= 8) {
       setConfirmed(false);
-      return; // Exit early if schools count is 8 or more
+    } else {
+      schools &&
+        schools.map((school) => {
+          if (school.school === currentSchool) {
+            setIterator(iterator+1)
+            console.log(iterator); 
+          }
+        });
     }
-  
-    let count = 0; // Local count variable to track matches
-  
-    schools && schools.forEach((school) => {
-      if (school.school === currentSchool) {
-        count++;
-      }
-    });
-  
-    // Update iterator state in a functional way
-    setIterator((prevIterator) => {
-      const newIterator = count;
-      if (newIterator === 3) {
-        setConfirmed(false);
-      } else {
-        setConfirmed(true);
-      }
-      return newIterator;
-    });
-  
-  }, [schools, currentSchool]);  
+  }, [schools]);
   console.log(confirmed);
+
+  useEffect(()=>{
+    console.log(iterator);
+    if(iterator===3){
+      setConfirmed(false);
+    }
+    else{
+      setConfirmed(true);
+    }
+  },[iterator])
+
   useEffect(() => {
     if (confirmed === false) {
       alert("No Eligible Seats Available For This Project, Kindly Select Other Project.");
