@@ -26,7 +26,7 @@ function Final() {
   const router = useRouter();
   const [confirmed, setConfirmed] = useState();
   const [schools, setSchools] = useState();
-  const [iterator,setIterator]=useState(0);
+  const [iterator, setIterator] = useState(0);
   const { data: session, status } = useSession();
   console.log(teacher_id);
   console.log(currentSchool);
@@ -64,31 +64,34 @@ function Final() {
 
   console.log(schools);
   useEffect(() => {
-    let i=0;
+    let i = 0;
     if (schools && schools.length >= 8) {
       setConfirmed(false);
     } else {
       schools &&
-        schools.map((school) => {
+        schools.map((school, index) => {
           if (school.school === currentSchool) {
             i++;
             console.log(i);
           }
+          if (index === schools.length - 1) {
+            console.log(i);
+            if (i >= 3) {
+              setConfirmed(false);
+            } else {
+              setConfirmed(true);
+            }
+          }
         });
-        console.log(i);
-        if(i>=3){
-          setConfirmed(false);
-        }
-        else{
-          setConfirmed(true);
-        }
     }
   }, [schools]);
   console.log(confirmed);
 
   useEffect(() => {
     if (confirmed === false) {
-      alert("No Eligible Seats Available For This Project, Kindly Select Other Project.");
+      alert(
+        "No Eligible Seats Available For This Project, Kindly Select Other Project."
+      );
       // signOut({ callbackUrl: "/" }).then(() => {
       //   router.push("/");
       // });
