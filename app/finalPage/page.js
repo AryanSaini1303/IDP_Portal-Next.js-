@@ -26,6 +26,7 @@ function Final() {
   const router = useRouter();
   const [confirmed, setConfirmed] = useState();
   const [schools, setSchools] = useState();
+  const [iterator,setIterator]=useState(0);
   const { data: session, status } = useSession();
   console.log(teacher_id);
   console.log(currentSchool);
@@ -69,11 +70,16 @@ function Final() {
       schools &&
         schools.map((school) => {
           if (school.school === currentSchool) {
-            setConfirmed(false);
-          } else {
-            setConfirmed(true);
+            setIterator(iterator+1)
+            console.log(iterator); 
           }
         });
+        if(iterator===3){
+          setConfirmed(false);
+        }
+        else{
+          setConfirmed(true);
+        }
     }
   }, [schools]);
   console.log(confirmed);
