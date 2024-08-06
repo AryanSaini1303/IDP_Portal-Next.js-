@@ -12,6 +12,7 @@ export default function LandingPage({ params }) {
   const [registered, setRegistered] = useState(false);
   const router = useRouter();
   const { data: session1, status } = useSession();
+  const [alertShown,setAlertShown]=useState();
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
@@ -37,6 +38,7 @@ export default function LandingPage({ params }) {
             throw new Error(`Error fetching data: ${response.statusText}`);
           }
           const data = await response.json();
+          console.log(data);
           setStudentData(data);
         } catch (err) {
           console.error("Error fetching student data:", err);
@@ -46,10 +48,11 @@ export default function LandingPage({ params }) {
     fetchData();
   }, [session]);
 
-  // console.log(studentData);
+  console.log(studentData);
 
   useEffect(() => {
-    if (studentData === null && router.pathname !== "/") {
+    if ((studentData === null|| !studentData) && router.pathname !== "/") {
+      console.log("here");
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });

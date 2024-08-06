@@ -13,7 +13,7 @@ const notoSans = Noto_Sans({
 export default function Home() {
   const { data: session } = useSession();
   const [screenWidth, setScreenWidth] = useState();
-  // console.log(session);
+  console.log(session);
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
