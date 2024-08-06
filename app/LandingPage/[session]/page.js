@@ -39,7 +39,7 @@ export default function LandingPage({ params }) {
           }
           const data = await response.json();
           console.log(data);
-          setStudentData(data);
+          data!=null?setStudentData(data):setStudentData(null);
         } catch (err) {
           console.error("Error fetching student data:", err);
         }
@@ -47,7 +47,6 @@ export default function LandingPage({ params }) {
     };
     fetchData();
   }, [session]);
-
   useEffect(() => {
     if (alertShow) {
       signOut({ callbackUrl: "/" }).then(() => {
@@ -58,9 +57,10 @@ export default function LandingPage({ params }) {
     }
   }, [alertShow]);
   console.log(studentData);
+  console.log(alertShow);
 
   useEffect(() => {
-    if ((studentData === null || !studentData) && router.pathname !== "/") {
+    if (studentData === null) {
       setAlertShow(true);
     } else if (studentData && studentData.teacherId) {
       setRegistered(true);
