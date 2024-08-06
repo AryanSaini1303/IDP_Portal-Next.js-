@@ -12,7 +12,7 @@ export default function LandingPage({ params }) {
   const [registered, setRegistered] = useState(false);
   const router = useRouter();
   const { data: session1, status } = useSession();
-  const [alertShown,setAlertShown]=useState();
+  const [alertShow, setAlertShow] = useState(false);
   useEffect(() => {
     setSession(JSON.parse(decodeURIComponent(params.session)));
   }, [params]);
@@ -48,16 +48,20 @@ export default function LandingPage({ params }) {
     fetchData();
   }, [session]);
 
-  console.log(studentData);
-
   useEffect(() => {
-    if ((studentData === null|| !studentData) && router.pathname !== "/") {
-      console.log("here");
+    if (alertShow) {
       signOut({ callbackUrl: "/" }).then(() => {
         router.push("/");
       });
       setDataNotFound(true);
       alert("Sign in with official Email-id only!");
+    }
+  }, [alertShow]);
+  console.log(studentData);
+
+  useEffect(() => {
+    if ((studentData === null || !studentData) && router.pathname !== "/") {
+      setAlertShow(true);
     } else if (studentData && studentData.teacherId) {
       setRegistered(true);
     }
