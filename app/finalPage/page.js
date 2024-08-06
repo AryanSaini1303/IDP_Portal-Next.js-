@@ -65,8 +65,13 @@ function Final() {
   console.log(schools);
   useEffect(() => {
     let i = 0;
-    if (schools && schools.length >= 8) {
-      setConfirmed(false);
+    if (schools) {
+      if(schools.length >= 8){
+        setConfirmed(false);
+      }
+      else if(schools.length===0){
+        setConfirmed(true);
+      }
     } else {
       schools &&
         schools.map((school, index) => {
