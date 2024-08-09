@@ -23,7 +23,7 @@ export default function NotRegisteredPage({
               <ul>
                 <li className="holder">Name:</li>
                 <li className="value">
-                  {session.user.name ? session.user.name : "----"}
+                  {studentData.name ?studentData.name : "----"}
                 </li>
                 <li className="holder">Admission:</li>
                 <li className="value">
