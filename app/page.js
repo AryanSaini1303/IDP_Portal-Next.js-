@@ -30,9 +30,9 @@ export default function Home() {
   }, [session]);
   return (
     <>
-      <div className={style.container}>
+      <div className={style.container} style={{justifyContent:"center"}}>
         <section className={style.login}>
-          <div className={style.logo}>
+          {/* <div className={style.logo}>
             <Image src={"/uniLogo.jpg"} width={screenWidth>615?180:150} height={screenWidth>615?70:65} alt="University Logo"/>
           </div>
           <Image
@@ -66,8 +66,8 @@ export default function Home() {
               alt="Github Logo"
             />{" "}
             <h3> Sign In With Github</h3>
-          </button>
-          {/*Remove the provider name from the 'signIn' function and you'll get the default screen with default provider button*/}
+          </button> */}
+          <h1 style={{margin:"1rem"}}>User limit Exceeded⚠️</h1>
         </section>
       </div>
     </>
