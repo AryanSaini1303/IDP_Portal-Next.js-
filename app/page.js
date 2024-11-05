@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Noto_Sans } from "next/font/google";
 import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import Maintenance from "@/components/maintenance";
 const notoSans = Noto_Sans({
   weight: "400",
   subsets: ["latin"],
@@ -30,7 +31,7 @@ export default function Home() {
   }, [session]);
   return (
     <>
-      <div className={style.container}>
+      {/* <div className={style.container}>
         <section className={style.login}>
           <div className={style.logo}>
             <Image src={"/uniLogo.jpg"} width={screenWidth>615?180:150} height={screenWidth>615?70:65} alt="University Logo"/>
@@ -67,9 +68,9 @@ export default function Home() {
             />{" "}
             <h3> Sign In With Github</h3>
           </button>
-          {/* <h1 style={{margin:"1rem"}}>User limit Exceeded⚠️</h1> */}
         </section>
-      </div>
+      </div> */}
+      <Maintenance/>
     </>
   );
 }
