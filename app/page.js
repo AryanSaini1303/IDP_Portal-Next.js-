@@ -31,7 +31,7 @@ export default function Home() {
   }, [session]);
   return (
     <>
-      <div className={style.container}>
+      {/* <div className={style.container}>
         <section className={style.login}>
           <div className={style.logo}>
             <Image src={"/uniLogo.jpg"} width={screenWidth>615?180:150} height={screenWidth>615?70:65} alt="University Logo"/>
@@ -69,8 +69,8 @@ export default function Home() {
             <h3> Sign In With Github</h3>
           </button>
         </section>
-      </div>
-      {/* <Maintenance/> */}
+      </div> */}
+      <Maintenance/>
     </>
   );
 }
